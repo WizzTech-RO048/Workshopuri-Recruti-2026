@@ -12,7 +12,6 @@ public class MainTeleOp extends LinearOpMode{
     private DcMotor RLmotor;
     private DcMotor RRmotor;
 
-
     @Override
     public void runOpMode() {
         FLmotor = hardwareMap.get(DcMotor.class, "motorname");
@@ -43,5 +42,4 @@ public class MainTeleOp extends LinearOpMode{
             RRmotor.setPower(RR/deliniarizare);
         }
     }
-
 }
