@@ -20,7 +20,7 @@ public class Main extends OpMode {
             components.setServoPosition(1);
         }
 
-        if (gamepad1.x) {
+        if (gamepad1.a) {
             components.setMotorSpeed(1500);
         } else if (gamepad1.b) {
             components.setMotorSpeed(0);
