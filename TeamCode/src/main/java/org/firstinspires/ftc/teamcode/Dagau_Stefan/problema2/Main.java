@@ -14,15 +14,15 @@ public class Main extends OpMode {
 
     @Override
     public void loop() {
-        if (gamepad1.left_trigger_pressed) {
+        if (gamepad1.left_trigger > 0.5) {
             components.setServoPosition(0);
-        } else if (gamepad1.right_trigger_pressed) {
+        } else if (gamepad1.right_trigger > 0.5) {
             components.setServoPosition(1);
         }
 
-        if (gamepad1.xWasPressed()) {
+        if (gamepad1.x) {
             components.setMotorSpeed(1500);
-        } else if (gamepad1.bWasPressed()) {
+        } else if (gamepad1.b) {
             components.setMotorSpeed(0);
         }
     }
