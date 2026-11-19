@@ -50,5 +50,6 @@ public class FlywheelTeleOp extends OpMode {
     @Override
     public void stop() {
         flywheel.setVelocity(0);
+        blocker.setPosition(0);
     }
 }
