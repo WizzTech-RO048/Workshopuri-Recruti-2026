@@ -1,29 +1,28 @@
 package org.firstinspires.ftc.teamcode.Dagau_Stefan.problema3;
 
-import static org.firstinspires.ftc.robotcore.external.JavaUtil.rgbToHue;
-
 import android.graphics.Color;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
+import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Components {
-    private NormalizedColorSensor sensor;
-    private Servo servo;
-
-    public void init(HardwareMap hwmap) {
+    private static NormalizedColorSensor sensor;
+    private static Servo servo;
+    public static void init(HardwareMap hwmap) {
         sensor = hwmap.get(NormalizedColorSensor.class, "color_sensor");
         servo = hwmap.get(Servo.class, "sorter_servo");
         sensor.setGain(Settings.GAIN);
     }
 
-    public int getColor() {
+    public static NormalizedRGBA getColor() {
         //return only the color
-        return sensor.getNormalizedColors().toColor();
+        return sensor.getNormalizedColors();
     }
 
-    public Settings.DetectedColors classifyColor(int color) {
+    public static Settings.DetectedColors classifyColor(NormalizedRGBA rgb) {
+        int color = rgb.toColor();
         final float[] hsv = new float[3];
 
         Color.colorToHSV(color, hsv);
@@ -45,7 +44,7 @@ public class Components {
         else return Settings.DetectedColors.UNKNOWN;
     }
 
-    public void changeServoPos(Settings.DetectedColors color) {
+    public static void changeServoPos(Settings.DetectedColors color) {
         if (color == Settings.DetectedColors.BLUE) servo.setPosition(Settings.SERVO_BLUE);
         else if (color == Settings.DetectedColors.RED) servo.setPosition(Settings.SERVO_RED);
         else servo.setPosition(Settings.SERVO_NEUTRAL);
