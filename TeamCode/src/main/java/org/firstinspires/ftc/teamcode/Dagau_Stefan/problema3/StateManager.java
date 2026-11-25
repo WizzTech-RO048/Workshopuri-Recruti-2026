@@ -71,6 +71,7 @@ public class StateManager {
         //does an action based on its state
         switch (state) {
             case RESETING: {
+                state = States.NEUTRAL;
                 blueCount = 0;
                 redCount = 0;
                 break;
