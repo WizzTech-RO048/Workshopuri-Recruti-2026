@@ -13,6 +13,7 @@ public class Components {
     public static void init(HardwareMap hwmap) {
         sensor = hwmap.get(NormalizedColorSensor.class, "color_sensor");
         servo = hwmap.get(Servo.class, "sorter_servo");
+        servo.setPosition(Settings.SERVO_NEUTRAL);
         sensor.setGain(Settings.GAIN);
     }
 

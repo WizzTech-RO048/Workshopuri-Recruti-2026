@@ -14,22 +14,22 @@ public class StateManager {
         RESETING
     }
 
-    private static final ElapsedTime sortingTimer = new ElapsedTime();
-    private static final ElapsedTime debounceTimer = new ElapsedTime();
-    private static States state = States.NEUTRAL;
-    private static Settings.DetectedColors previousColor = Settings.DetectedColors.UNKNOWN;
-    private static Settings.DetectedColors newColor = Settings.DetectedColors.UNKNOWN;
+    private final ElapsedTime sortingTimer = new ElapsedTime();
+    private final ElapsedTime debounceTimer = new ElapsedTime();
+    private States state = States.NEUTRAL;
+    private Settings.DetectedColors previousColor = Settings.DetectedColors.UNKNOWN;
+    private Settings.DetectedColors newColor = Settings.DetectedColors.UNKNOWN;
 
     //asta este complet optional si este doar de vazut ce culoare a fost confirmata
     //--------------------------------------------------------------------------------------
-    private static Settings.DetectedColors confirmedColor = Settings.DetectedColors.UNKNOWN;
+    private Settings.DetectedColors confirmedColor = Settings.DetectedColors.UNKNOWN;
     //--------------------------------------------------------------------------------------
 
-    private static boolean reseted = false;
+    private boolean reseted = false;
 
 
-    private static int redCount = 0;
-    private static int blueCount = 0;
+    private int redCount = 0;
+    private int blueCount = 0;
 
     public void init(HardwareMap hwmap) {
         Components.init(hwmap);
@@ -58,6 +58,7 @@ public class StateManager {
     public void checkIfReseting(boolean event) {
         if (event && !reseted) {
             state = States.RESETING;
+            reseted = true;
         }
         //if it has reseted, check until the event is 'false' and turn it to true to turn back reseted into false
         if (!event) {
@@ -77,6 +78,7 @@ public class StateManager {
             case SORTING: {
                 if (sortingTimer.seconds() >= Settings.SORT_HOLD_SECONDS) {
                     state = States.NEUTRAL;
+                    Components.changeServoPos(Settings.DetectedColors.UNKNOWN);
                 }
                 break;
             }

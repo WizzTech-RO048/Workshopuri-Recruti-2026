@@ -9,11 +9,12 @@ import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 public class Main extends OpMode {
 
     private StateManager stateManager = new StateManager();
-    @Deprecated
+
+    @Override
     public void init() {
         stateManager.init(hardwareMap);
     }
-
+    @Override
     public void loop() {
         stateManager.checkIfNeededSorting();
         stateManager.checkIfReseting(gamepad1.a);
