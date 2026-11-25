@@ -62,7 +62,6 @@ public class StateManager {
         }
         //if it has reseted, check until the event is 'false' and turn it to true to turn back reseted into false
         if (!event) {
-            state = States.NEUTRAL;
             reseted = false;
         }
     }
