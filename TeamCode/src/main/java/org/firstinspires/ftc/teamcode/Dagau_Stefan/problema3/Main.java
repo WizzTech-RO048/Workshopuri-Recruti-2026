@@ -14,13 +14,14 @@ public class Main extends OpMode {
     public void init() {
         stateManager.init(hardwareMap);
     }
+
     @Override
     public void loop() {
         stateManager.checkIfNeededSorting();
         stateManager.checkIfReseting(gamepad1.a);
         stateManager.startAction();
 
-        NormalizedRGBA colors = Components.getColor();
+        NormalizedRGBA colors = Components.getNormRGBA();
         float nR = colors.red/colors.alpha;
         float nG = colors.green/colors.alpha;
         float nB = colors.blue/colors.alpha;

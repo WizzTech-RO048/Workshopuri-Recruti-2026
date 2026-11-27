@@ -16,6 +16,7 @@ public class StateManager {
 
     private final ElapsedTime sortingTimer = new ElapsedTime();
     private final ElapsedTime debounceTimer = new ElapsedTime();
+
     private States state = States.NEUTRAL;
     private Settings.DetectedColors previousColor = Settings.DetectedColors.UNKNOWN;
     private Settings.DetectedColors newColor = Settings.DetectedColors.UNKNOWN;
@@ -35,7 +36,7 @@ public class StateManager {
         Components.init(hwmap);
     }
     public void checkIfNeededSorting() {
-        NormalizedRGBA rawcolor = Components.getColor();
+        NormalizedRGBA rawcolor = Components.getNormRGBA();
         newColor = Components.classifyColor(rawcolor);
 
         if (newColor != Settings.DetectedColors.UNKNOWN) {

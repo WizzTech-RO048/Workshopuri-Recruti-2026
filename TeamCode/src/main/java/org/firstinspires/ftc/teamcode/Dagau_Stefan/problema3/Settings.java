@@ -5,8 +5,8 @@ public class Settings {
     public static final int GAIN = 4;
 
     //thresholds
-    public static final double MIN_INTENSITY_RED1 = 350;
-    public static final double MIN_INTENSITY_RED2 = 10;
+    public static final double MAX_INTENSITY_RED1 = 350;
+    public static final double MAX_INTENSITY_RED = 10;
 
     public static final double MIN_INTENSITY_BLUE = 190;
     public static final double MAX_INTENSITY_BLUE = 245;

@@ -8,8 +8,10 @@ import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Components {
+    
     private static NormalizedColorSensor sensor;
     private static Servo servo;
+    
     public static void init(HardwareMap hwmap) {
         sensor = hwmap.get(NormalizedColorSensor.class, "color_sensor");
         servo = hwmap.get(Servo.class, "sorter_servo");
@@ -17,12 +19,12 @@ public class Components {
         sensor.setGain(Settings.GAIN);
     }
 
-    public static NormalizedRGBA getColor() {
-        //return only the color
+    public static NormalizedRGBA getNormRGBA() {
         return sensor.getNormalizedColors();
     }
 
     public static Settings.DetectedColors classifyColor(NormalizedRGBA rgb) {
+        //turn it into a color int and then turn it into HSV
         int color = rgb.toColor();
         final float[] hsv = new float[3];
 
@@ -37,8 +39,9 @@ public class Components {
         if (value <= Settings.MIN_VALUE) return Settings.DetectedColors.UNKNOWN;
 
         //return the color
-        if (hue >= Settings.MIN_INTENSITY_RED1) return Settings.DetectedColors.RED;
-        else if (Settings.MIN_INTENSITY_RED2 >= hue) return Settings.DetectedColors.RED;
+        if (hue >= Settings.MAX_INTENSITY_RED1 || Settings.MAX_INTENSITY_RED >= hue) {
+            return Settings.DetectedColors.RED;
+        }
         else if (Settings.MIN_INTENSITY_BLUE <= hue && hue <= Settings.MAX_INTENSITY_BLUE) {
             return Settings.DetectedColors.BLUE;
         }
