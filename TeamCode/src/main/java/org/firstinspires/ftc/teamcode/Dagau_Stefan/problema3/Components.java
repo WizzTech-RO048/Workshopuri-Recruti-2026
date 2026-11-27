@@ -39,7 +39,7 @@ public class Components {
         if (value <= Settings.MIN_VALUE) return Settings.DetectedColors.UNKNOWN;
 
         //return the color
-        if (hue >= Settings.MAX_INTENSITY_RED1 || Settings.MAX_INTENSITY_RED >= hue) {
+        if (hue >= Settings.MAX_INTENSITY_RED || Settings.MIN_INTENSITY_RED >= hue) {
             return Settings.DetectedColors.RED;
         }
         else if (Settings.MIN_INTENSITY_BLUE <= hue && hue <= Settings.MAX_INTENSITY_BLUE) {
